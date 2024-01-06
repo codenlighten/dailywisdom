@@ -27,6 +27,7 @@
         border-radius: 0.25rem;
         padding: 1rem;
         margin-bottom: 1rem;
+        text-align: left;
       }
 
       #new-wisdom {
@@ -51,7 +52,6 @@
       <div id="wisdom-quote">
         <div id="status"></div>
       </div>
-      <!-- <button id="new-wisdom">Get New Wisdom</button> -->
     </div>
     <script>
       const wisdomQuote = document.querySelector("#wisdom-quote");
@@ -64,8 +64,11 @@
           .then((response) => response.json())
           .then((data) => {
             status.innerHTML = "";
-            //add  data to status with paragraph spacing
-            status.innerHTML = data.wisdom;
+            // Process and add data to status with paragraph spacing
+            status.innerHTML = data.wisdom
+              .split("\n")
+              .map((paragraph) => `<p>${paragraph}</p>`)
+              .join("");
           })
           .catch((error) => {
             console.log(error);
@@ -76,10 +79,6 @@
       }
 
       getWisdom();
-
-      //   newWisdom.addEventListener("click", () => {
-      //     getWisdom();
-      //   });
       date.innerHTML = new Date().toDateString();
     </script>
   </body>
