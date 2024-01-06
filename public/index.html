@@ -49,7 +49,7 @@
       <h1>Team Lightside</h1>
       <p id="date"></p>
       <div id="wisdom-quote">
-        <p id="status"></p>
+        <div id="status"></div>
       </div>
       <!-- <button id="new-wisdom">Get New Wisdom</button> -->
     </div>
@@ -63,6 +63,7 @@
         fetch("/dailyWisdom")
           .then((response) => response.json())
           .then((data) => {
+            status.innerHTML = "";
             //add  data to status with paragraph spacing
             status.innerHTML = data.wisdom;
           })
