@@ -51,11 +51,11 @@
       <div id="wisdom-quote">
         <!-- Wisdom quote will be displayed here -->
       </div>
-      <button id="new-wisdom">Get New Wisdom</button>
+      <!-- <button id="new-wisdom">Get New Wisdom</button> -->
     </div>
     <script>
       const wisdomQuote = document.querySelector("#wisdom-quote");
-      const newWisdom = document.querySelector("#new-wisdom");
+      //   const newWisdom = document.querySelector("#new-wisdom");
       const date = document.querySelector("#date");
 
       function getWisdom() {
@@ -74,9 +74,9 @@
 
       getWisdom();
 
-      newWisdom.addEventListener("click", () => {
-        getWisdom();
-      });
+      //   newWisdom.addEventListener("click", () => {
+      //     getWisdom();
+      //   });
       date.innerHTML = new Date().toDateString();
     </script>
   </body>
