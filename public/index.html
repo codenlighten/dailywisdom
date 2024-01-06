@@ -49,20 +49,22 @@
       <h1>Team Lightside</h1>
       <p id="date"></p>
       <div id="wisdom-quote">
-        <!-- Wisdom quote will be displayed here -->
+        <p id="status"></p>
       </div>
       <!-- <button id="new-wisdom">Get New Wisdom</button> -->
     </div>
     <script>
       const wisdomQuote = document.querySelector("#wisdom-quote");
-      //   const newWisdom = document.querySelector("#new-wisdom");
       const date = document.querySelector("#date");
+      const status = document.querySelector("#status");
 
       function getWisdom() {
+        status.innerHTML = "Loading...";
         fetch("/dailyWisdom")
           .then((response) => response.json())
           .then((data) => {
-            wisdomQuote.innerHTML = data.wisdom;
+            //add formatted data to the DOM
+            status.innerHTML = data.wisdom;
           })
           .catch((error) => {
             console.log(error);
