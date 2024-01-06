@@ -63,7 +63,7 @@
         fetch("/dailyWisdom")
           .then((response) => response.json())
           .then((data) => {
-            //add formatted data to the DOM
+            //add  data to status with paragraph spacing
             status.innerHTML = data.wisdom;
           })
           .catch((error) => {
