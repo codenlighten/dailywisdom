@@ -7,6 +7,9 @@ const { Configuration, OpenAIApi } = require("openai");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+
+let visitors = 0;
+
 const askAI = async (question, context) => {
   try {
     let model = "gpt-3.5-turbo";
@@ -49,6 +52,7 @@ let today = new Date();
 console.log(today.getDate());
 
 app.get("/dailywisdom", async (req, res) => {
+  visitors++;
   try {
     let question = req.query.question;
     let context = req.query.context;
@@ -77,6 +81,7 @@ app.get("/dailywisdom", async (req, res) => {
             day: "numeric",
           })}`,
           wisdom: answer,
+          visitors: visitors,
         });
       } else {
         return res.json({
@@ -87,6 +92,7 @@ app.get("/dailywisdom", async (req, res) => {
             day: "numeric",
           })}`,
           wisdom: dailywisdom,
+          visitors: visitors,
         });
       }
     }
@@ -99,6 +105,7 @@ app.get("/dailywisdom", async (req, res) => {
         day: "numeric",
       })}`,
       wisdom: answer,
+      visitors: visitors,
     });
   } catch (err) {
     console.log(err);

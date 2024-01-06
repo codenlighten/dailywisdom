@@ -74,6 +74,11 @@
         background-color: #000;
         color: #fff;
       }
+      #visitors {
+        text-align: left;
+        color: #fff;
+        text-shadow: 0 0 0.5rem #fff;
+      }
     </style>
   </head>
   <body>
@@ -82,6 +87,9 @@
       <p id="date"></p>
       <div id="wisdom-quote">
         <div id="status"></div>
+      </div>
+      <div id="visitors">
+        <p id="visitorNumber"></p>
       </div>
     </div>
     <script>
@@ -95,11 +103,15 @@
           .then((response) => response.json())
           .then((data) => {
             status.innerHTML = "";
+            console.log(data.visitors);
             // Process and add data to status with paragraph spacing
             status.innerHTML = data.wisdom
               .split("\n")
               .map((paragraph) => `<p>${paragraph}</p>`)
               .join("");
+            document.getElementById(
+              "visitorNumber"
+            ).innerHTML = `You are visitor number ${data.visitors}`;
           })
           .catch((error) => {
             console.log(error);
