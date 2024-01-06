@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Wisdom</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background-color: #f5f5f5;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      #wisdom-quote {
+        background-color: #fff;
+        border-radius: 0.25rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      #new-wisdom {
+        background-color: #fff;
+        border: 1px solid #000;
+        border-radius: 0.25rem;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      #new-wisdom:hover {
+        background-color: #000;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Daily Wisdom</h1>
+      <p id="date"></p>
+      <div id="wisdom-quote">
+        <!-- Wisdom quote will be displayed here -->
+      </div>
+      <button id="new-wisdom">Get New Wisdom</button>
+    </div>
+    <script>
+      const wisdomQuote = document.querySelector("#wisdom-quote");
+      const newWisdom = document.querySelector("#new-wisdom");
+      const date = document.querySelector("#date");
+
+      function getWisdom() {
+        fetch("/dailyWisdom")
+          .then((response) => response.json())
+          .then((data) => {
+            wisdomQuote.innerHTML = data.wisdom;
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            console.log("Request completed");
+          });
+      }
+
+      getWisdom();
+
+      newWisdom.addEventListener("click", () => {
+        getWisdom();
+      });
+      date.innerHTML = new Date().toDateString();
+    </script>
+  </body>
+</html>
